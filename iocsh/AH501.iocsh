@@ -9,8 +9,14 @@
 #- MODEL          - Optional: AH501 Model (AH501/AH501C/AH501D) 
 #-                  Default: AH501
 #-
-#- RING_SIZE      - Optional: Ring Size
+#- RING_SIZE      - Optional: Ring Buffer Size
 #-                  Default: 10000
+#-
+#- QSIZE          - Optional: Queue size
+#-                  Default: 20
+#-
+#- TSPOINTS       - Optional: Number of time series points
+#-                  Default: 1000
 #- ###################################################
 
 drvAsynIPPortConfigure("IP_$(INSTANCE)", "$(IP_ADDR)", 0, 0, 0)
@@ -22,3 +28,5 @@ dbLoadRecords("$(ASYN)/db/asynRecord.db", "P=$(PREFIX), R=asyn_IP_$(INSTANCE),PO
 drvAHxxxConfigure("$(INSTANCE)", "IP_$(INSTANCE)", $(RING_SIZE=10000), "$(MODEL=AH501)")
 
 dbLoadRecords("$(QUADEM)/db/AH501.template", "P=$(PREFIX), R=$(INSTANCE):, PORT=$(INSTANCE)")
+
+iocshLoad("$(QUADEM)/iocsh/commonPlugins.iocsh")

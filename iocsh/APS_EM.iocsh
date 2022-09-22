@@ -15,6 +15,15 @@
 #- 
 #- UNIDIG_CHAN    - Optional: IP-Unidig channel connected to quadEM pulse output
 #-                  Default: 0
+#-
+#- RING_SIZE      - Optional: Ring Buffer Size
+#-                  Default: 10000
+#-
+#- QSIZE          - Optional: Queue size
+#-                  Default: 20
+#-
+#- TSPOINTS       - Optional: Number of time series points
+#-                  Default: 1000
 #- ###################################################
 
 drvAPS_EMConfigure("$(INSTANCE)", $(ADDRESS), 0, "$(UNIDIG_NAME=0)", $(UNIDIG_CHAN=0), "DIGITAL_INPUT")
@@ -23,3 +32,5 @@ drvAPS_EMConfigure("$(INSTANCE)", $(ADDRESS), 2, "$(UNIDIG_NAME=0)", $(UNIDIG_CH
 drvAPS_EMConfigure("$(INSTANCE)", $(ADDRESS), 3, "$(UNIDIG_NAME=0)", $(UNIDIG_CHAN=0), "DIGITAL_INPUT")
 
 dbLoadRecords("$(QUADEM)/db/APS_EM.template", "P=$(PREFIX), R=$(INSTANCE):, PORT=$(INSTANCE)")
+
+iocshLoad("$(QUADEM)/iocsh/commonPlugins.iocsh")
